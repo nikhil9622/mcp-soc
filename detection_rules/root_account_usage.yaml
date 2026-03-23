@@ -1,0 +1,14 @@
+title: Root Account Usage
+id: e5f6a7b8-c9d0-4234-8fab-345678901234
+status: stable
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    user_type: Root
+  condition: selection
+tags:
+  - attack.t1078.003
+  - attack.privilege_escalation
+level: critical

@@ -1,0 +1,16 @@
+title: Multiple Failed Logins
+id: a1b2c3d4-e5f6-4890-abcd-ef1234567890
+status: stable
+match_type: threshold
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventName: ConsoleLogin
+    responseElements.ConsoleLogin: Failure
+  condition: selection | count() > 5
+tags:
+  - attack.t1110
+  - attack.credential_access
+level: medium

@@ -1,0 +1,14 @@
+title: Internal Network Port Scanning
+id: b8c9d0e1-f2a3-4456-1234-567890123007
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: network_scan
+  condition: selection
+tags:
+  - attack.t1046
+  - attack.discovery
+level: medium

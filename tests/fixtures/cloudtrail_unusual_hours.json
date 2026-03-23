@@ -1,0 +1,16 @@
+{
+  "eventVersion": "1.08",
+  "userIdentity": {
+    "type": "IAMUser",
+    "userName": "dave",
+    "arn": "arn:aws:iam::123456789012:user/dave"
+  },
+  "eventTime": "2024-06-15T03:00:00Z",
+  "eventName": "ConsoleLogin",
+  "sourceIPAddress": "5.6.7.8",
+  "awsRegion": "us-east-1",
+  "responseElements": {
+    "ConsoleLogin": "Success"
+  },
+  "eventSource": "signin.amazonaws.com"
+}

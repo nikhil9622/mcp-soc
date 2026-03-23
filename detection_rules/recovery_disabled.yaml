@@ -1,0 +1,14 @@
+title: System Recovery Inhibited - Shadow Copies Deleted
+id: b7c8d9e0-f1a2-4357-c123-456789012031
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: recovery_disabled
+  condition: selection
+tags:
+  - attack.t1490
+  - attack.impact
+level: critical

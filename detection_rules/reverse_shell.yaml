@@ -1,0 +1,14 @@
+title: Reverse Shell Connection Established
+id: d1e2f3a4-b5c6-4791-e567-890123456015
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: reverse_shell
+  condition: selection
+tags:
+  - attack.t1059.004
+  - attack.execution
+level: critical

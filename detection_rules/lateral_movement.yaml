@@ -1,0 +1,14 @@
+title: Lateral Movement via Explicit Credentials
+id: d4e5f6a7-b8c9-4012-def0-123456789003
+status: stable
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    action: windows_explicit_logon
+  condition: selection
+tags:
+  - attack.t1021
+  - attack.lateral_movement
+level: high

@@ -1,0 +1,6 @@
+{
+  "message": "Jun 15 14:05:00 myserver sudo: alice : TTY=pts/0 ; PWD=/home/alice ; USER=root ; COMMAND=/bin/bash",
+  "timestamp": "2024-06-15T14:05:00Z",
+  "host": "myserver",
+  "file": "/var/log/auth.log"
+}

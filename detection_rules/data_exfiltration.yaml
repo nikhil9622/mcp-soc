@@ -1,0 +1,14 @@
+title: Data Exfiltration - Suspicious Large Transfer
+id: c9d0e1f2-a3b4-4567-2345-678901234008
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: data_exfiltration
+  condition: selection
+tags:
+  - attack.t1041
+  - attack.exfiltration
+level: critical

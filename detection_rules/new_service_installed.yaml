@@ -1,0 +1,14 @@
+title: Suspicious New Service Installed
+id: c3d4e5f6-a7b8-4901-cdef-012345678902
+status: stable
+logsource:
+  product: windows
+  service: system
+detection:
+  selection:
+    action: windows_service_installed
+  condition: selection
+tags:
+  - attack.t1543
+  - attack.persistence
+level: high

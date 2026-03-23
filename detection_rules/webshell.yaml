@@ -1,0 +1,14 @@
+title: Web Shell Detected
+id: f3a4b5c6-d7e8-4913-a789-012345678017
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: webshell
+  condition: selection
+tags:
+  - attack.t1505.003
+  - attack.persistence
+level: critical

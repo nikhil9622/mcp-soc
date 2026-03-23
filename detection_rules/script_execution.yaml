@@ -1,0 +1,14 @@
+title: Suspicious Script Interpreter Execution
+id: e2f3a4b5-c6d7-4802-f678-901234567016
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: script_execution
+  condition: selection
+tags:
+  - attack.t1204
+  - attack.execution
+level: high

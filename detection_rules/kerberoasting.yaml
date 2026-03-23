@@ -1,0 +1,14 @@
+title: Kerberoasting - TGS Ticket Request Abuse
+id: b9c0d1e2-f3a4-4579-c345-678901234013
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: kerberoasting
+  condition: selection
+tags:
+  - attack.t1558
+  - attack.credential_access
+level: critical

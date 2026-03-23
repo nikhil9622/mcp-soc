@@ -1,0 +1,14 @@
+title: Account and Group Enumeration
+id: c2d3e4f5-a6b7-4802-d678-901234567026
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: account_discovery
+  condition: selection
+tags:
+  - attack.t1087
+  - attack.discovery
+level: medium

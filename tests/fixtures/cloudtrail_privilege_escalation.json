@@ -1,0 +1,18 @@
+{
+  "eventVersion": "1.08",
+  "userIdentity": {
+    "type": "IAMUser",
+    "userName": "charlie",
+    "arn": "arn:aws:iam::123456789012:user/charlie"
+  },
+  "eventTime": "2024-06-15T09:15:00Z",
+  "eventName": "PutUserPolicy",
+  "sourceIPAddress": "10.0.0.5",
+  "awsRegion": "us-east-1",
+  "requestParameters": {
+    "userName": "charlie",
+    "policyName": "AdminAccess",
+    "policyDocument": "{\"Version\":\"2012-10-17\",\"Statement\":[{\"Effect\":\"Allow\",\"Action\":\"*\",\"Resource\":\"*\"}]}"
+  },
+  "eventSource": "iam.amazonaws.com"
+}

@@ -1,0 +1,12 @@
+.env
+frontend/
+data/
+*.pyc
+__pycache__/
+.git/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.venv/
+venv/
+config/firebase-service-account.json

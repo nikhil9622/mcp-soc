@@ -1,0 +1,14 @@
+title: DNS Tunneling - Covert Data Exfiltration
+id: f5a6b7c8-d9e0-4135-a901-234567890029
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: dns_tunneling
+  condition: selection
+tags:
+  - attack.t1048.003
+  - attack.exfiltration
+level: critical

@@ -1,0 +1,14 @@
+title: Suspicious Registry Modification
+id: a0b1c2d3-e4f5-4680-b456-789012345024
+status: stable
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    action: registry_modified
+  condition: selection
+tags:
+  - attack.t1112
+  - attack.defense_evasion
+level: medium

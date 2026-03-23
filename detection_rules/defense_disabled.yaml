@@ -1,0 +1,14 @@
+title: Security Tool Disabled - Firewall or AV Stopped
+id: e8f9a0b1-c2d3-4468-f234-567890123022
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: defense_disabled
+  condition: selection
+tags:
+  - attack.t1562
+  - attack.defense_evasion
+level: critical

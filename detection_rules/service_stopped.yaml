@@ -1,0 +1,14 @@
+title: Critical Service Stopped
+id: a6b7c8d9-e0f1-4246-b012-345678901030
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: service_stopped
+  condition: selection
+tags:
+  - attack.t1489
+  - attack.impact
+level: high

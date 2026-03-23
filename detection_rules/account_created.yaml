@@ -1,0 +1,14 @@
+title: New User Account Created
+id: e5f6a7b8-c9d0-4123-ef01-234567890004
+status: stable
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    action: windows_account_created
+  condition: selection
+tags:
+  - attack.t1136
+  - attack.persistence
+level: high

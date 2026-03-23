@@ -1,0 +1,14 @@
+title: PowerShell Encoded Command Execution
+id: c0d1e2f3-a4b5-4680-d456-789012345014
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: powershell_encoded
+  condition: selection
+tags:
+  - attack.t1059.001
+  - attack.execution
+level: high

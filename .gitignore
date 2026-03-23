@@ -1,0 +1,90 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.egg-info/
+dist/
+build/
+venv/
+.venv/
+
+# Environment — NEVER commit secrets
+.env
+*.env.local
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+
+# Docker volumes
+mongo-data/
+redis-data/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs & test artifacts
+*.log
+.pytest_cache/
+.coverage
+
+# Temp one-off setup scripts
+temp_*.py
+inline_*.py
+exec_*.py
+final_*.py
+finalize_*.py
+quick_*.py
+min_*.py
+oneliner_*.py
+bootstrap_*.py
+trigger_*.py
+import_and_run.py
+phase9_*.py
+github_actions_setup*.py
+github_actions_setup*.bat
+execute_github*.py
+execute_setup*.py
+setup_github*.py
+__auto_import_setup__.py
+__setup_runner__.py
+_auto_setup.py
+direct_setup.*
+ci.yml
+workflows-ci.yml
+workflows_ci.yml
+make_dirs.bat
+test-with-fake-data.bat
+start-soc.bat
+start-frontend-only.bat
+test_phase9.bat
+run_tests.bat
+github-actions-setup-workaround.py
+run_github_final.bat
+run_github_setup.bat
+run_github_setup.py
+run_setup.bat
+run_setup.cmd
+run_setup.py
+run_tests.py
+run_and_show.py
+run_final_setup.py
+run_workflow_setup.py
+run_script.bat
+run_tests.bat
+create_frontend_dirs.py
+create_workflows.py
+verify_setup.py
+setup_actions.bat
+setup.bat
+
+# HTML dump files
+SOC\ Prime*.html
+SOC\ Prime*_files/
+.claude/
+config/firebase-service-account.json
+config/vector-0.54.0*
+data/enterprise-attack.json

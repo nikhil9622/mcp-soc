@@ -1,0 +1,14 @@
+title: Windows Failed Logon (Brute Force)
+id: b2c3d4e5-f6a7-4890-bcde-f12345678901
+status: stable
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    action: windows_login_failure
+  condition: selection
+tags:
+  - attack.t1110
+  - attack.credential_access
+level: high

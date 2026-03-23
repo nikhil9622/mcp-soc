@@ -1,0 +1,9 @@
+services:
+  mongodb:
+    ports: ["27017:27017"]
+  redis:
+    ports: ["6379:6379"]
+  mcp-broker:
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+    volumes:
+      - .:/app

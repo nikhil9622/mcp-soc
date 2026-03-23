@@ -1,0 +1,14 @@
+title: Command and Control Beaconing Detected
+id: d0e1f2a3-b4c5-4678-3456-789012345009
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: c2_beacon
+  condition: selection
+tags:
+  - attack.t1071
+  - attack.command_and_control
+level: critical

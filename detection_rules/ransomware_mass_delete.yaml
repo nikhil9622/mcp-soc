@@ -1,0 +1,14 @@
+title: Ransomware - Mass File Encryption or Deletion
+id: a7b8c9d0-e1f2-4345-0123-456789012006
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: mass_file_operation
+  condition: selection
+tags:
+  - attack.t1486
+  - attack.impact
+level: critical

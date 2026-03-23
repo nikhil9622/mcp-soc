@@ -1,0 +1,14 @@
+title: Startup Persistence via Registry Run Key
+id: a4b5c6d7-e8f9-4024-b890-123456789018
+status: stable
+logsource:
+  product: windows
+  service: security
+detection:
+  selection:
+    action: startup_persistence
+  condition: selection
+tags:
+  - attack.t1547.001
+  - attack.persistence
+level: high

@@ -1,0 +1,14 @@
+title: Account Manipulation - Password Changed or MFA Disabled
+id: b5c6d7e8-f9a0-4135-c901-234567890019
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: account_manipulation
+  condition: selection
+tags:
+  - attack.t1098
+  - attack.persistence
+level: high

@@ -1,0 +1,14 @@
+title: Security Event Log Cleared (Defence Evasion)
+id: e1f2a3b4-c5d6-4789-4567-890123456010
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: log_cleared
+  condition: selection
+tags:
+  - attack.t1070
+  - attack.defense_evasion
+level: high

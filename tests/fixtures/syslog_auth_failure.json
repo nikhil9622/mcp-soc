@@ -1,0 +1,6 @@
+{
+  "message": "Jun 15 14:00:00 myserver sshd[12345]: Failed password for user alice from 203.0.113.10 port 22 ssh2",
+  "timestamp": "2024-06-15T14:00:00Z",
+  "host": "myserver",
+  "file": "/var/log/auth.log"
+}

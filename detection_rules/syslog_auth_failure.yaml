@@ -1,0 +1,14 @@
+title: SSH Authentication Failure (syslog)
+id: f6a7b8c9-d0e1-4345-8abc-456789012345
+status: stable
+logsource:
+  product: linux
+  service: auth
+detection:
+  selection:
+    action: sshd
+  condition: selection
+tags:
+  - attack.t1110
+  - attack.credential_access
+level: medium

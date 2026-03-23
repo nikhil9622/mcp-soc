@@ -1,0 +1,14 @@
+title: Data Staged for Exfiltration
+id: e4f5a6b7-c8d9-4024-f890-123456789028
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: data_staged
+  condition: selection
+tags:
+  - attack.t1074
+  - attack.collection
+level: high

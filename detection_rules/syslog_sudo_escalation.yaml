@@ -1,0 +1,14 @@
+title: Sudo Privilege Escalation (syslog)
+id: a7b8c9d0-e1f2-4456-abcd-567890123456
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: sudo
+  condition: selection
+tags:
+  - attack.t1078.003
+  - attack.privilege_escalation
+level: high

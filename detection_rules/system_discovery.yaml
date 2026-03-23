@@ -1,0 +1,14 @@
+title: System Information Discovery
+id: b1c2d3e4-f5a6-4791-c567-890123456025
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: system_discovery
+  condition: selection
+tags:
+  - attack.t1082
+  - attack.discovery
+level: low

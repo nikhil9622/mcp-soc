@@ -1,0 +1,14 @@
+title: Pass-the-Hash Attack Detected
+id: d3e4f5a6-b7c8-4913-e789-012345678027
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: pass_the_hash
+  condition: selection
+tags:
+  - attack.t1550.002
+  - attack.lateral_movement
+level: critical

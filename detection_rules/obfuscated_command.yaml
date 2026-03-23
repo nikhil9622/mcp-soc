@@ -1,0 +1,14 @@
+title: Obfuscated Command Execution Detected
+id: f9a0b1c2-d3e4-4579-a345-678901234023
+status: stable
+logsource:
+  product: linux
+  service: syslog
+detection:
+  selection:
+    action: obfuscated_command
+  condition: selection
+tags:
+  - attack.t1027
+  - attack.defense_evasion
+level: medium

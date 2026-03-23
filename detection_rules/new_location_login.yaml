@@ -1,0 +1,16 @@
+title: Login from New Geographic Location
+id: b2c3d4e5-f6a7-4901-bcde-f12345678901
+status: stable
+match_type: new_location
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventName: ConsoleLogin
+    is_new_location: "true"
+  condition: selection
+tags:
+  - attack.t1078
+  - attack.initial_access
+level: medium

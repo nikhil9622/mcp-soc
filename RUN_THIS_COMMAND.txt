@@ -1,0 +1,50 @@
+RUN THIS COMMAND TO COMPLETE SETUP:
+
+python setup_github_actions_simple.py
+
+════════════════════════════════════════════════════════════════════════════════
+
+LOCATION: C:\Users\belid\Downloads\soc exp
+
+EXPECTED OUTPUT:
+  =====================================================================
+  MCP SOC - GitHub Actions Setup
+  =====================================================================
+  
+  Project root: C:\Users\belid\Downloads\soc exp
+  
+  Creating directory: ...\soc exp\.github\workflows
+  ✓ Directory created
+  
+  Creating workflow file: ...\soc exp\.github\workflows\ci.yml
+  ✓ Workflow file created
+  
+  Verification:
+    - Directory exists: True
+    - Workflow exists: True
+    - Workflow size: 4081 bytes
+  
+  =====================================================================
+  ✓ GitHub Actions setup complete!
+  =====================================================================
+
+SUCCESS INDICATORS:
+  ✅ No errors displayed
+  ✅ Directory created message shown
+  ✅ Workflow file created message shown
+  ✅ File size displayed
+  ✅ Verification shows both True
+
+AFTER SETUP:
+  1. Verify file exists: .github\workflows\ci.yml
+  2. Commit: git add .github/
+  3. Push: git push origin main
+  4. Check GitHub Actions tab for workflow runs
+
+ALTERNATIVE COMMANDS IF FIRST ONE DOESN'T WORK:
+
+python github-actions-setup-workaround.py
+OR
+github_actions_setup.bat
+
+════════════════════════════════════════════════════════════════════════════════
