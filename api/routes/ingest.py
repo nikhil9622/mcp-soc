@@ -24,7 +24,7 @@ async def _enqueue_events(tenant_id: str, records: list[dict], source: str):
 async def ingest_cloudtrail(
     payload: CloudTrailPayload,
     background_tasks: BackgroundTasks,
-    tenant_id: str = Depends(get_current_user),
+    tenant_id: str = Depends(get_current_user_api_key),
 ):
     background_tasks.add_task(_enqueue_events, tenant_id, payload.records, "cloudtrail")
     return {"status": "accepted", "count": len(payload.records)}
