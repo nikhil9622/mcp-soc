@@ -45,7 +45,7 @@ function ScoreRing({ score, color }: { score: number; color: string }) {
 }
 
 export default function CompliancePage() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const router   = useRouter();
   const [fw, setFw] = useState("nist_csf");
   const [exporting, setExporting] = useState(false);
@@ -56,6 +56,7 @@ export default function CompliancePage() {
     { revalidateOnFocus: false }
   );
 
+  if (loading) return null;
   if (!user) { router.push("/login"); return null; }
 
   const fwMeta = FRAMEWORKS.find(f => f.key === fw)!;

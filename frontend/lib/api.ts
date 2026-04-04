@@ -361,3 +361,53 @@ export async function checkHealth() {
   if (!res.ok) throw new Error("API unhealthy");
   return res.json();
 }
+
+// ============================================================================
+// TEAM MANAGEMENT API
+// ============================================================================
+
+export async function fetchTeamMembers() {
+  const headers = await authHeaders();
+  const res = await fetch(`${API_URL}/team/members`, { headers });
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+export async function inviteTeamMember(email: string, role: string) {
+  const headers = await authHeaders();
+  const res = await fetch(`${API_URL}/team/invite`, {
+    method: "POST",
+    headers: { ...headers, "Content-Type": "application/json" },
+    body: JSON.stringify({ email, role })
+  });
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+export async function updateMemberRole(userId: string, role: string) {
+  const headers = await authHeaders();
+  const res = await fetch(`${API_URL}/team/members/${userId}/role`, {
+    method: "PATCH",
+    headers: { ...headers, "Content-Type": "application/json" },
+    body: JSON.stringify({ role })
+  });
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+export async function removeMember(userId: string) {
+  const headers = await authHeaders();
+  const res = await fetch(`${API_URL}/team/members/${userId}`, {
+    method: "DELETE",
+    headers
+  });
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}
+
+export async function fetchDevices() {
+  const headers = await authHeaders();
+  const res = await fetch(`${API_URL}/devices`, { headers });
+  if (!res.ok) throw new Error(await res.text());
+  return res.json();
+}

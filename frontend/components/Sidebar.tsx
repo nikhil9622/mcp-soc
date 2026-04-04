@@ -22,6 +22,7 @@ import {
   Briefcase,
   Search,
   ClipboardCheck,
+  Users,
 } from "lucide-react";
 
 const NAV = [
@@ -36,6 +37,7 @@ const NAV = [
   { icon: Activity,        label: "UEBA",              href: "/ueba",             section: "main" },
   { icon: ClipboardCheck,  label: "Compliance",        href: "/compliance",       section: "main" },
   { icon: Server,          label: "Connect Device",   href: "/connect",          section: "config" },
+  { icon: Users,           label: "Team",             href: "/team",             section: "config" },
 ];
 
 const PIPELINE = [

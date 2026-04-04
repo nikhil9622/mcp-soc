@@ -322,6 +322,126 @@ async def download_agent(tenant_id: str = Depends(get_current_user)):
     )
 
 
+@router.get("/download-exe")
+async def download_exe():
+    """Serve the MCP SOC Agent EXE file."""
+    import os
+    exe_path = os.path.join(os.path.dirname(__file__), "..", "..", "static", "MCP_SOC_Agent.exe")
+    exe_path = os.path.abspath(exe_path)
+    if not os.path.exists(exe_path):
+        raise HTTPException(status_code=404, detail="Agent EXE not found on server.")
+    from fastapi.responses import FileResponse
+    return FileResponse(exe_path, media_type="application/octet-stream", filename="MCP_SOC_Agent.exe")
+
+
+@router.get("/download-installer")
+async def download_installer_exe():
+    """Serve the MCP SOC Agent Windows Installer (Setup EXE)."""
+    import os
+    setup_path = os.path.join(os.path.dirname(__file__), "..", "..", "static", "MCP_SOC_Agent_Setup.exe")
+    setup_path = os.path.abspath(setup_path)
+    if not os.path.exists(setup_path):
+        raise HTTPException(status_code=404, detail="Installer not found on server.")
+    from fastapi.responses import FileResponse
+    return FileResponse(setup_path, media_type="application/octet-stream", filename="MCP_SOC_Agent_Setup.exe")
+
+
+INSTALLER_TEMPLATE = '''# MCP SOC Agent Installer
+# Pre-configured for your account — run as Administrator
+
+$ApiKey    = "{api_key}"
+$TenantId  = "{tenant_id}"
+$Email     = "{email}"
+$SocApi    = "{api_url}"
+$AppData   = "$env:APPDATA\\MCP_SOC"
+$ExePath   = "$AppData\\MCP_SOC_Agent.exe"
+$CfgPath   = "$AppData\\agent_config.json"
+$ExeUrl    = "{api_url}/agent/download-exe"
+
+Write-Host "============================================" -ForegroundColor Cyan
+Write-Host "  MCP SOC Agent Installer" -ForegroundColor Cyan
+Write-Host "  Account : {email}" -ForegroundColor Cyan
+Write-Host "============================================" -ForegroundColor Cyan
+
+# 1. Create app directory
+if (-not (Test-Path $AppData)) {{
+    New-Item -ItemType Directory -Path $AppData -Force | Out-Null
+    Write-Host "[+] Created $AppData" -ForegroundColor Green
+}}
+
+# 2. Download EXE
+Write-Host "[*] Downloading MCP SOC Agent..." -ForegroundColor Yellow
+try {{
+    Invoke-WebRequest -Uri $ExeUrl -OutFile $ExePath -UseBasicParsing
+    Write-Host "[+] Agent downloaded to $ExePath" -ForegroundColor Green
+}} catch {{
+    Write-Host "[ERROR] Download failed: $_" -ForegroundColor Red
+    exit 1
+}}
+
+# 3. Write config with your API key
+$Config = @{{
+    device_id   = [System.Guid]::NewGuid().ToString()
+    api_key     = $ApiKey
+    tenant_id   = $TenantId
+    email       = $Email
+    role        = "analyst_l1"
+    device_name = $env:COMPUTERNAME
+}} | ConvertTo-Json
+$Config | Out-File -FilePath $CfgPath -Encoding UTF8
+Write-Host "[+] Config saved to $CfgPath" -ForegroundColor Green
+
+# 4. Desktop shortcut
+$Shell    = New-Object -ComObject WScript.Shell
+$Shortcut = $Shell.CreateShortcut("$env:USERPROFILE\\Desktop\\MCP SOC Agent.lnk")
+$Shortcut.TargetPath       = $ExePath
+$Shortcut.WorkingDirectory = $AppData
+$Shortcut.Description      = "MCP SOC Security Agent"
+$Shortcut.Save()
+Write-Host "[+] Desktop shortcut created" -ForegroundColor Green
+
+# 5. Add to startup (auto-start on login)
+$RegKey = "HKCU:\\Software\\Microsoft\\Windows\\CurrentVersion\\Run"
+Set-ItemProperty -Path $RegKey -Name "MCP_SOC_Agent" -Value $ExePath
+Write-Host "[+] Added to Windows startup" -ForegroundColor Green
+
+Write-Host ""
+Write-Host "============================================" -ForegroundColor Green
+Write-Host "  Installation complete!" -ForegroundColor Green
+Write-Host "  Starting MCP SOC Agent now..." -ForegroundColor Green
+Write-Host "============================================" -ForegroundColor Green
+Start-Process -FilePath $ExePath
+'''
+
+
+@router.get("/installer")
+async def download_installer(api_key: str, tenant_id: str = Depends(get_current_user)):
+    """Generate a personalized PowerShell installer with the user's API key pre-configured."""
+    from shared.api_keys import verify_api_key
+
+    users_col = get_collection("users")
+    user = await users_col.find_one({"user_id": tenant_id})
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    stored_hash = user.get("api_key_hash", "")
+    if not stored_hash or not verify_api_key(api_key, stored_hash):
+        raise HTTPException(status_code=403, detail="Invalid API key")
+
+    script = INSTALLER_TEMPLATE.format(
+        api_key=api_key,
+        tenant_id=tenant_id,
+        email=user.get("email", ""),
+        api_url=settings.API_BASE_URL or "http://178.128.100.145:8000",
+    )
+
+    return Response(
+        content=script,
+        media_type="text/plain",
+        headers={"Content-Disposition": 'attachment; filename="install_mcp_soc_agent.ps1"'},
+    )
+
+
 @router.get("/download-configured")
 async def download_agent_configured(api_key: str, tenant_id: str = Depends(get_current_user)):
     """Serve agent.py with the actual API key embedded (called right after key generation)."""

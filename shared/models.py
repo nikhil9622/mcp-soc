@@ -161,3 +161,29 @@ class UpdateCaseRequest(BaseModel):
     title: str | None = None
     description: str | None = None
     tags: list[str] | None = None
+
+
+class Device(BaseModel):
+    tenant_id: str
+    device_id: str
+    device_name: str
+    os: str
+    ip: str
+    mac: str = ""
+    agent_version: str = "1.0.0"
+    registered_by: str
+    registered_at: datetime = Field(default_factory=datetime.utcnow)
+    last_seen: datetime = Field(default_factory=datetime.utcnow)
+    events_sent: int = 0
+
+
+class TeamMember(BaseModel):
+    tenant_id: str
+    user_id: str | None = None
+    email: str
+    role: Literal["soc_manager", "analyst_l1", "analyst_l2", "readonly"] = "analyst_l1"
+    status: Literal["pending", "active", "removed"] = "pending"
+    invited_by: str
+    invited_at: datetime = Field(default_factory=datetime.utcnow)
+    accepted_at: datetime | None = None
+    invite_token: str = Field(default_factory=lambda: str(uuid4()))

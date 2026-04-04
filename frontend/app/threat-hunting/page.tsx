@@ -38,7 +38,7 @@ function Timeline({ data }: { data: { hour: string; count: number }[] }) {
 }
 
 export default function ThreatHuntingPage() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const router   = useRouter();
 
   const [query, setQuery] = useState({ user: "", ip: "", action: "", source: "", free_text: "", hours: 24 });
@@ -50,6 +50,7 @@ export default function ThreatHuntingPage() {
 
   const { data: saved, mutate: mutateSaved } = useSWR(user ? "saved-hunts" : null, fetchSavedHunts);
 
+  if (loading) return null;
   if (!user) { router.push("/login"); return null; }
 
   const handleRun = async () => {

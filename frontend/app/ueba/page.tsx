@@ -122,13 +122,14 @@ function EntityDetail({ entity }: { entity: string }) {
 }
 
 export default function UebaPage() {
-  const { user }  = useAuth();
+  const { user, loading }  = useAuth();
   const router    = useRouter();
   const [selected, setSelected] = useState<string | null>(null);
   const [filter, setFilter]     = useState<"all" | "anomalous">("all");
 
   const { data, isLoading, mutate } = useSWR(user ? "ueba-entities" : null, fetchUebaEntities, { revalidateOnFocus: false });
 
+  if (loading) return null;
   if (!user) { router.push("/login"); return null; }
 
   const entities: any[] = (data?.entities ?? []).filter((e: any) =>

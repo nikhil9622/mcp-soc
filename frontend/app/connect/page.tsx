@@ -126,7 +126,6 @@ export default function ConnectPage() {
   const [keyPrefix, setKeyPrefix]   = useState<string | null>(null);
   const [loading, setLoading]       = useState(false);
   const [revoked, setRevoked]       = useState(false);
-  const [keyCopied, setKeyCopied]   = useState(false);
   const [downloading, setDownloading] = useState(false);
 
   const { data: stats, mutate: mutateStats } = useSWR(
@@ -159,7 +158,7 @@ export default function ConnectPage() {
   };
 
   const KEY = apiKey ?? "YOUR_API_KEY";
-  const API = "http://your-soc-server:8000";
+  const API = "https://mcpsoc.dev";
 
   const activeMethod = METHODS.find(m => m.id === activeTab)!;
 
@@ -186,6 +185,29 @@ export default function ConnectPage() {
               </p>
             </div>
             <div style={{ display: "flex", flexDirection: "column", gap: 8, flexShrink: 0 }}>
+              {/* Windows Installer — proper setup wizard */}
+              <button
+                onClick={() => {
+                  const a = document.createElement("a");
+                  a.href = `${process.env.NEXT_PUBLIC_API_URL}/agent/download-installer`;
+                  a.download = "MCP_SOC_Agent_Setup.exe";
+                  a.click();
+                }}
+                style={{
+                  display: "flex", alignItems: "center", gap: 8,
+                  padding: "12px 22px", borderRadius: 8,
+                  background: "var(--green-dim)", border: "1px solid var(--green-mid)",
+                  color: "var(--green)", fontSize: 14, fontWeight: 700,
+                  cursor: "pointer", fontFamily: "Inter, sans-serif",
+                }}
+              >
+                <Download size={16} />
+                ⬇ Download Windows Installer (.exe)
+              </button>
+              <div style={{ fontSize: 10, color: "var(--text-faint)", textAlign: "center", fontFamily: "JetBrains Mono, monospace" }}>
+                Proper setup wizard — installs & auto-starts on boot
+              </div>
+              {/* Python fallback */}
               <button
                 onClick={async () => {
                   setDownloading(true);
@@ -196,19 +218,15 @@ export default function ConnectPage() {
                 disabled={downloading}
                 style={{
                   display: "flex", alignItems: "center", gap: 8,
-                  padding: "10px 20px", borderRadius: 8,
-                  background: "var(--green-dim)", border: "1px solid var(--green-mid)",
-                  color: "var(--green)", fontSize: 13, fontWeight: 700,
+                  padding: "7px 14px", borderRadius: 8,
+                  background: "rgba(255,255,255,0.03)", border: "1px solid var(--border)",
+                  color: "var(--text-mute)", fontSize: 11, fontWeight: 600,
                   cursor: "pointer", fontFamily: "Inter, sans-serif",
-                  opacity: downloading ? 0.6 : 1,
                 }}
               >
-                <Download size={14} />
-                {downloading ? "Downloading…" : "Download mcp_soc_agent.py"}
+                <Download size={12} />
+                Python script (Linux / advanced)
               </button>
-              <div style={{ fontSize: 10, color: "var(--text-faint)", textAlign: "center", fontFamily: "JetBrains Mono, monospace" }}>
-                Works on Windows & Linux
-              </div>
             </div>
           </div>
 

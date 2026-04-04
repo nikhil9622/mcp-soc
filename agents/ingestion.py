@@ -233,14 +233,20 @@ def _normalize_syslog(record: dict, tenant_id: str) -> NormalizedEvent:
         # Map Windows Event IDs to normalized actions
         WIN_ACTIONS = {
             4625: "windows_login_failure",   # Failed logon
+            4740: "windows_login_failure",   # Account locked out (result of brute force)
+            4771: "windows_login_failure",   # Kerberos pre-auth failure
             4624: "windows_login_success",   # Successful logon
             4648: "windows_explicit_logon",  # Logon with explicit credentials
             4720: "windows_account_created",
+            4726: "windows_account_deleted",
             4728: "windows_group_member_added",
             4732: "windows_group_member_added",
             4756: "windows_group_member_added",
             4698: "windows_scheduled_task",
             7045: "windows_service_installed",
+            4688: "windows_process_created",
+            4657: "registry_modified",
+            4663: "windows_file_access",
         }
         action = WIN_ACTIONS.get(int(win_event_id), f"windows_event_{win_event_id}")
         user   = _extract_windows_user(msg) or record.get("source", "unknown")

@@ -27,6 +27,7 @@ ENV PATH=/home/mcpsoc/.local/bin:$PATH
 COPY agents/ ./agents/
 COPY api/ ./api/
 COPY config/ ./config/
+COPY data/ ./data/
 COPY db/ ./db/
 COPY detection_rules/ ./detection_rules/
 COPY shared/ ./shared/
@@ -42,7 +43,7 @@ USER mcpsoc
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
-  CMD python -c "import requests; requests.get('http://localhost:8000/api/health')" || exit 1
+  CMD python -c "import requests; r=requests.get('http://localhost:8000/health', timeout=5); exit(0 if r.status_code==200 else 1)" || exit 1
 
 # CMD is overridden per service in docker-compose.yml
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

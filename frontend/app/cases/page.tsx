@@ -18,7 +18,7 @@ const STATUS_LABEL: Record<string, string> = {
 };
 
 export default function CasesPage() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
   const router   = useRouter();
   const [showNew, setShowNew] = useState(false);
   const [title, setTitle]     = useState("");
@@ -28,6 +28,7 @@ export default function CasesPage() {
 
   const { data: cases, mutate } = useSWR(user ? "cases" : null, fetchCases, { refreshInterval: 15000 });
 
+  if (loading) return null;
   if (!user) { router.push("/login"); return null; }
 
   const handleCreate = async () => {

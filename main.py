@@ -6,7 +6,7 @@ from db.mongo import connect_mongo, close_mongo
 from db.redis_client import connect_redis, close_redis
 from db.init_db import create_indexes
 from shared.config import settings
-from api.routes import health, users, devices, ingest, alerts, incidents, tenants, rules, isolation, agent, graph, ioc, mitre, cases, hunting, ueba, compliance
+from api.routes import health, users, devices, ingest, alerts, incidents, tenants, rules, isolation, agent, graph, ioc, mitre, cases, hunting, ueba, compliance, sources, team
 
 
 @asynccontextmanager
@@ -46,3 +46,5 @@ app.include_router(cases.router)
 app.include_router(hunting.router)
 app.include_router(ueba.router)
 app.include_router(compliance.router)
+app.include_router(sources.router)
+app.include_router(team.router)

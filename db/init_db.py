@@ -49,6 +49,18 @@ async def create_indexes() -> None:
         IndexModel([("timestamp", ASCENDING)], expireAfterSeconds=365 * 24 * 3600),
     ])
 
+    devices: AsyncIOMotorCollection = get_collection("devices")
+    await devices.create_indexes([
+        IndexModel([("tenant_id", ASCENDING), ("device_id", ASCENDING)], unique=True),
+        IndexModel([("tenant_id", ASCENDING), ("last_seen", -1)]),
+    ])
+
+    team_members: AsyncIOMotorCollection = get_collection("team_members")
+    await team_members.create_indexes([
+        IndexModel([("tenant_id", ASCENDING), ("email", ASCENDING)]),
+        IndexModel([("invite_token", ASCENDING)], unique=True, sparse=True),
+    ])
+
 
 if __name__ == "__main__":
     async def main():

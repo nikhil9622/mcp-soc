@@ -75,5 +75,18 @@ services:
     depends_on: [redis, mongodb]
     restart: unless-stopped
 
+  syslog-listener:
+    build: .
+    command: python -m agents.syslog_listener
+    ports:
+      - "514:514/udp"
+      - "601:601/tcp"
+    env_file: .env
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - MONGODB_URL=mongodb://mongodb:27017
+    depends_on: [redis, mongodb]
+    restart: unless-stopped
+
 volumes:
   mongo_data:
