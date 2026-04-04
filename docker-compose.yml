@@ -2,14 +2,12 @@ services:
   redis:
     image: redis:7-alpine
     restart: unless-stopped
-    ports:
-      - "6379:6379"
+    # Port NOT exposed externally — only accessible by other containers
 
   mongodb:
     image: mongo:7
     restart: unless-stopped
-    ports:
-      - "27017:27017"
+    # Port NOT exposed externally — only accessible by other containers
     volumes:
       - mongo_data:/data/db
 
